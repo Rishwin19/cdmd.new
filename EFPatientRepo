@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using CDMD_Project.Entities;
+using CDMD_Project.Repo;
+using CDMD_Project.ViewModel;
+
+namespace CDMD_Project.EFRepo
+{
+    public class EFPatientRepo : IPatientRepo
+    {
+        private CdmdDbEntities _context;
+       
+
+       
+        private EFPatientRepo()
+        {
+            _context = new CdmdDbEntities();
+
+        }
+        private static EFPatientRepo _instance;
+        public static EFPatientRepo Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new EFPatientRepo();
+                }
+                return _instance;
+            }
+        }
+
+        public void Create(Patient newPatient)
+        {
+            _context.Patients.Add(newPatient);
+            _context.SaveChanges();
+        }
+
+        public void Delete(Patient patient)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<Patient> ReadAll()
+        {
+
+            return new ObservableCollection<Patient>(_context.Patients.ToList());
+        }
+
+        public void Update(Patient patient)
+        {
+            var existingPatient = _context.Patients.Find(patient.PatientID);
+            if (existingPatient != null)
+            {
+                existingPatient.FullName = patient.FullName;
+                existingPatient.Age = patient.Age;
+                existingPatient.Gender = patient.Gender;
+                existingPatient.Address = patient.Address;
+                existingPatient.Email = patient.Email;
+                existingPatient.Condition = patient.Condition;
+                existingPatient.AssignedDoctorID = patient.AssignedDoctorID;
+                _context.Patients.Attach(patient);
+                _context.SaveChanges();
+            }
+            else
+            {
+                //MessageBox.show
+
+            }
+        }
+
+        public Patient GetPatientByPhonenumber(string PhoneNumber)
+        {
+            var queryresult = (from p in _context.Patients where p.PhoneNumber == PhoneNumber select p);
+            var patients = queryresult.ToList();
+            var patient = queryresult.FirstOrDefault();
+            
+
+            return patient;
+        }
+    }
+}
+
