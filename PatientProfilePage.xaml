@@ -1,0 +1,75 @@
+<Window x:Class="CDMD_Project.Pages.PatientProfilePage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CDMD_Project.Pages"
+        mc:Ignorable="d"
+        Title="PatientRegistrationPage" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Patient Registration Form -->
+        <Label Grid.Column="0" Grid.Row="0" Margin="5">Patient ID:</Label>
+
+        <TextBox Grid.Column="1" Grid.Row="0" Margin="5" x:Name="txtPatientID" Text="{Binding Patient.PatientID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" />
+
+        <Label Grid.Column="0" Grid.Row="1" Margin="5">Full Name:</Label>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5" x:Name="txtFullName" Text="{Binding Patient.FullName,Mode =TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <Label Grid.Column="0" Grid.Row="2" Margin="5">Age:</Label>
+        <TextBox Grid.Column="1" Grid.Row="2" Margin="5" x:Name="txtAge" Text="{Binding Patient.Age}"/>
+
+        <Label Grid.Column="0" Grid.Row="3" Margin="5">Gender:</Label>
+        <ComboBox Grid.Column="1" Grid.Row="3" Margin="5" x:Name="cmbGender" Text="{Binding Patient.Gender}">
+            <ComboBoxItem>Male</ComboBoxItem>
+            <ComboBoxItem>Female</ComboBoxItem>
+        </ComboBox>
+
+        <Label Grid.Column="0" Grid.Row="4" Margin="5">Address:</Label>
+        <TextBox Grid.Column="1" Grid.Row="4" Margin="5" x:Name="txtAddress" Text="{Binding Patient.Address}"/>
+
+        <Label Grid.Column="0" Grid.Row="5" Margin="5">Phone Number:</Label>
+        <TextBox Grid.Column="1" Grid.Row="5" Margin="5" x:Name="txtPhoneNumber" Text="{Binding Patient.PhoneNumber}"/>
+
+        <Label Grid.Column="0" Grid.Row="6" Margin="5">Email:</Label>
+        <TextBox Grid.Column="1" Grid.Row="6" Margin="5" x:Name="txtEmail" Text="{Binding Patient.Email}"/>
+
+        <Label Grid.Column="0" Grid.Row="7" Margin="5">Condition:</Label>
+        <TextBox Grid.Column="1" Grid.Row="7" Margin="5" x:Name="txtCondition" Text="{Binding Patient.Condition}"/>
+
+        <Label Grid.Column="0" Grid.Row="8" Margin="5">Assigned Doctor ID:</Label>
+        <TextBox Grid.Column="1" Grid.Row="8" Margin="5" x:Name="txtAssignedDoctorID" Text="{Binding Patient.AssignedDoctorID}"/>
+
+        <Button Grid.Column="1" Grid.Row="9" Margin="5" x:Name="btnRegister" Content="Save" Command="{Binding CreateOrUpdateCommand}" Click="btnRegister_Click"/>
+
+        <StackPanel Grid.Column="0" Grid.Row="12" Margin="5" Orientation="Horizontal">
+            <CheckBox x:Name="chkDevice1" Content="Device 1" IsChecked="{Binding Device1}" />
+            <CheckBox x:Name="chkDevice2" Content="Device 2" IsChecked="{Binding Device2}" />
+            <CheckBox x:Name="chkDevice3" Content="Device 3" IsChecked="{Binding Device3}" />
+            <CheckBox x:Name="chkDevice4" Content="Device 4" IsChecked="{Binding Device4}" />
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="12" Margin="5,5,5,41" x:Name="btnLoadData" Content="New " Command="{Binding NewCommand}"/>
+        <Button Grid.Row="12" Margin="256,35,4,7" x:Name="btnLoadData_Copy" Content="Search patient" Command="{Binding SearchCommand}"/>
+        <TextBox HorizontalAlignment="Left" Margin="34,37,0,0" Grid.Row="12" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" Height="22" Text="{Binding PatientPhonenumber}"/>
+    </Grid>
+</Window>
