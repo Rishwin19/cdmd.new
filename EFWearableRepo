@@ -1,0 +1,37 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CDMD_Project.Entities;
+using CDMD_Project.Repo;
+
+namespace CDMD_Project.EFRepo
+{
+    public class EFWearableRepo: IWearableRepo
+    {
+        private CdmdDbEntities _context;
+        public EFWearableRepo() 
+        {
+            _context = new CdmdDbEntities();
+
+        }
+        private static EFWearableRepo _instance;
+        public static EFWearableRepo Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new EFWearableRepo();
+                }
+                return _instance;
+            }
+        }
+        public void Create(WearableDevice device)
+        {
+            _context.WearableDevices.Add(device);
+            _context.SaveChanges();
+        }
+    }
+}
